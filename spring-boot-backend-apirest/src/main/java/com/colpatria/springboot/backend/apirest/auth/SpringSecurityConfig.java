@@ -42,9 +42,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.anyRequest().authenticated()
 		.and()
-		//se desabilita por que no se necesita validar formualrio ya que se hace desde angular, estan independientes falsificacion de peticion en sitios cruzados 
 		.csrf().disable()
-		//No se maneja la session en el back ya que lo maneja el cliente por medio del token
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 }

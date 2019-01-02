@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
-//clase para configurar el servidor de autorizacion
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -46,8 +46,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.secret(passwordEncoder.encode("12345"))
 		.scopes("read", "write")
 		.authorizedGrantTypes("password", "refresh_token")
-		.accessTokenValiditySeconds(30)
-		.refreshTokenValiditySeconds(60);
+		.accessTokenValiditySeconds(3600)
+		.refreshTokenValiditySeconds(3600);
 	}
 
 	//Configuracion de validacion de las credenciales, manejo del token. (los 3 metodos)

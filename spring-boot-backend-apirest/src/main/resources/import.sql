@@ -1,3 +1,12 @@
+INSERT INTO regiones (id, nombre) VALUES (1, 'Sudamérica');
+INSERT INTO regiones (id, nombre) VALUES (2, 'Centroamérica');
+INSERT INTO regiones (id, nombre) VALUES (3, 'Norteamérica');
+INSERT INTO regiones (id, nombre) VALUES (4, 'Europa');
+INSERT INTO regiones (id, nombre) VALUES (5, 'Asia');
+INSERT INTO regiones (id, nombre) VALUES (6, 'Africa');
+INSERT INTO regiones (id, nombre) VALUES (7, 'Oceanía');
+INSERT INTO regiones (id, nombre) VALUES (8, 'Antártida');
+
 INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Andrés', 'Guzmán', 'profesor@bolsadeideas.com', '2018-01-01');
 INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Mr. John', 'Doe', 'john.doe@gmail.com', '2018-01-02');
 INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Linus', 'Torvalds', 'linus.torvalds@gmail.com', '2018-01-03');
