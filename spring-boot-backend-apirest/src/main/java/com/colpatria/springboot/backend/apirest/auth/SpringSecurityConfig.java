@@ -32,7 +32,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	@Bean("authenticationManager")
+	@Bean()
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
