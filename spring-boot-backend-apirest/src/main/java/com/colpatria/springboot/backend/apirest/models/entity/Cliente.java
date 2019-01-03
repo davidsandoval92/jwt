@@ -31,6 +31,19 @@ public class Cliente implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
 	
+	public Cliente() {
+		
+	}
+	
+	public Cliente(Long id, String nombre, String apellido, String email, Date createAt) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.createAt = createAt;
+
+	}
+	
 	@PrePersist
 	public void prePersist() {
 		createAt =new Date();

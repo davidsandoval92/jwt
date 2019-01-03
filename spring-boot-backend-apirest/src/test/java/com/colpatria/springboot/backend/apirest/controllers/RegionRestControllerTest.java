@@ -37,7 +37,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.colpatria.springboot.backend.apirest.SpringBootBackendApirestApplication;
 import com.colpatria.springboot.backend.apirest.models.entity.Region;
 import com.colpatria.springboot.backend.apirest.models.services.IRegionService;
-import com.colpatria.springboot.backend.testdatabuilder.RegionTestDataBuilder;
+import com.colpatria.springboot.backend.apirest.testdatabuilder.RegionTestDataBuilder;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource( locations = "classpath:applicationtest.properties")
