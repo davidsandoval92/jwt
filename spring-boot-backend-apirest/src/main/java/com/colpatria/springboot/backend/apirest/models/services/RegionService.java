@@ -14,6 +14,10 @@ public class RegionService implements IRegionService {
 
 	@Autowired
 	IRegionDao regionDao;
+	
+	public RegionService(IRegionDao regionDao) {
+		this.regionDao = regionDao;
+	}
 
 	@Override
 	@Transactional(readOnly = true)

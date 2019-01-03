@@ -21,6 +21,7 @@ import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+<<<<<<< HEAD
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -28,9 +29,14 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.colpatria.springboot.backend.apirest.SpringBootBackendApirestApplication;
 import com.colpatria.springboot.backend.apirest.models.entity.Cliente;
-import com.colpatria.springboot.backend.apirest.util.TokenGenerator;
 import com.colpatria.springboot.backend.apirest.testdatabuilder.ClienteTestDataBuilder;
 import com.colpatria.springboot.backend.apirest.utils.ToolsUtils;
+=======
+import org.springframework.web.context.WebApplicationContext;
+
+import com.colpatria.springboot.backend.apirest.SpringBootBackendApirestApplication;
+import com.colpatria.springboot.backend.apirest.util.TokenGenerator;
+>>>>>>> 10d020fc94763c1b02cb99ea1be60a761e620c28
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootBackendApirestApplication.class)
@@ -41,7 +47,10 @@ public class ClienteRestControllerTest {
 	@Autowired
 	private WebApplicationContext context;
 	private MockMvc mvc;
+<<<<<<< HEAD
 	private ToolsUtils toolsUtils;
+=======
+>>>>>>> 10d020fc94763c1b02cb99ea1be60a761e620c28
 
 	private String TOKEN = "";
 	private static final String CONTENT_TYPE = "application/json;charset=UTF-8";
@@ -49,10 +58,36 @@ public class ClienteRestControllerTest {
 	@Before
 	public void setup() throws Exception {
 		mvc = MockMvcBuilders.webAppContextSetup(context).apply(springSecurity()).build();
-		TOKEN = TokenGenerator.obtainAccessToken("admin", "12345", mvc);
+<<<<<<< HEAD
+		TOKEN = this.obtainAccessToken("admin", "12345");
 		this.toolsUtils = new ToolsUtils();
 	}
 
+	private String obtainAccessToken(String username, String password) throws Exception {
+		final MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("grant_type", "password");
+		params.add("client_id", CLIENT_ID);
+		params.add("username", username);
+		params.add("password", password);
+
+		// @formatter:off
+
+		ResultActions result = mvc
+				.perform(post("/oauth/token").params(params).with(httpBasic(CLIENT_ID, CLIENT_SECRET))
+						.accept(CONTENT_TYPE))
+				.andExpect(status().isOk()).andExpect(content().contentType(CONTENT_TYPE));
+
+		String resultString = result.andReturn().getResponse().getContentAsString();
+
+		JacksonJsonParser jsonParser = new JacksonJsonParser();
+		return jsonParser.parseMap(resultString).get("access_token").toString();
+	}
+
+=======
+		TOKEN = TokenGenerator.obtainAccessToken("admin", "12345", mvc);
+	}
+
+>>>>>>> 10d020fc94763c1b02cb99ea1be60a761e620c28
 	@Test
 	public void given_clientes_without_token() throws Exception {
 		mvc.perform(get("/clientes")).andExpect(status().isUnauthorized());
@@ -60,6 +95,7 @@ public class ClienteRestControllerTest {
 
 	@Test
 	public void given_clientes_ok() throws Exception {
+<<<<<<< HEAD
 
 		// @formatter:off
 		mvc.perform(get("/api/clientes").header("Authorization", "Bearer " + TOKEN).contentType(CONTENT_TYPE)
@@ -102,4 +138,9 @@ public class ClienteRestControllerTest {
 				.content(toolsUtils.asJsonString(cliente)).accept(CONTENT_TYPE)).andDo(print())
 				.andExpect(status().isOk());
 	}
+=======
+		mvc.perform(get("/api/clientes").header("Authorization", "Bearer " + TOKEN).contentType(CONTENT_TYPE)
+				.accept(CONTENT_TYPE)).andDo(print()).andExpect(jsonPath("$", hasSize(12))).andExpect(status().isOk());
+	}
+>>>>>>> 10d020fc94763c1b02cb99ea1be60a761e620c28
 }
