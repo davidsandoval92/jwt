@@ -19,14 +19,14 @@ public class Region implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	private String nombre;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -38,7 +38,7 @@ public class Region implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Region(Long id, String nombre) {
+	public Region(Integer id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
