@@ -29,7 +29,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	InfoAdicionalToken infoAdicionalToken;
 	
 	@Autowired
-	@Qualifier("authenticationManager")
 	private AuthenticationManager authenticationManager;
 
 	//Configuracion los permisos de nuestros endpoints (rutas de acceso)
