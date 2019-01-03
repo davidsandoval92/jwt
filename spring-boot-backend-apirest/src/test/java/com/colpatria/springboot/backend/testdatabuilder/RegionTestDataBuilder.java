@@ -4,10 +4,10 @@ import com.colpatria.springboot.backend.apirest.models.entity.Region;
 
 public class RegionTestDataBuilder {
 
-	private static final Long ID = new Long(100);
+	private static final Integer ID = 100;
 	private static final String NOMBRE = "Polo Norte";
 
-	private Long id;
+	private Integer id;
 	private String nombre;
 
 	public RegionTestDataBuilder() {
@@ -15,7 +15,7 @@ public class RegionTestDataBuilder {
 		this.nombre = NOMBRE;
 	}
 
-	public RegionTestDataBuilder withId(Long id) {
+	public RegionTestDataBuilder withId(Integer id) {
 		this.id = id;
 		return this;
 	}
