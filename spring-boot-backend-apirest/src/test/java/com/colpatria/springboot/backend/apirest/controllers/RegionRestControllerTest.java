@@ -25,6 +25,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -39,6 +40,7 @@ import com.colpatria.springboot.backend.apirest.models.services.IRegionService;
 import com.colpatria.springboot.backend.testdatabuilder.RegionTestDataBuilder;
 
 @RunWith(SpringRunner.class)
+@TestPropertySource( locations = "classpath:applicationtest.properties")
 @SpringBootTest(classes = SpringBootBackendApirestApplication.class)
 @AutoConfigureMockMvc
 public class RegionRestControllerTest {
