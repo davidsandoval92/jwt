@@ -1,6 +1,6 @@
 package com.colpatria.springboot.backend.apirest.controllers;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,19 +27,16 @@ public class ClienteRestController {
 	private IClienteService clienteService;
 
 	@GetMapping("/clientes")
-	public List<Cliente> index() {
-		return clienteService.findAll();
-
+	public ResponseEntity<?> index() {
+		return new ResponseEntity<>(clienteService.findAll(), HttpStatus.OK);	
 	}
 	
 	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/clientes/{id}")
-	public ResponseEntity<?> show(@PathVariable Long id) {
+	public ResponseEntity<?> show(@PathVariable Long id) {		
 		
-		Cliente cliente = null;
-		cliente = clienteService.findById(id);
-		
-		return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+		Cliente cliente = clienteService.findById(id);		
+		return new ResponseEntity<>(cliente, HttpStatus.OK);
 	}
 	
 	@PostMapping("/clientes")
