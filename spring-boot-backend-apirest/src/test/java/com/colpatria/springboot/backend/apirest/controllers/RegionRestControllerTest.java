@@ -31,7 +31,7 @@ import org.springframework.http.MediaType;
 import com.colpatria.springboot.backend.apirest.SpringBootBackendApirestApplication;
 import com.colpatria.springboot.backend.apirest.models.entity.Region;
 import com.colpatria.springboot.backend.apirest.models.services.IRegionService;
-import com.colpatria.springboot.backend.testdatabuilder.RegionTestDataBuilder;
+import com.colpatria.springboot.backend.apirest.testdatabuilder.RegionTestDataBuilder;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootBackendApirestApplication.class)

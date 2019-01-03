@@ -1,4 +1,4 @@
-package com.colpatria.springboot.backend.testdatabuilder;
+package com.colpatria.springboot.backend.apirest.testdatabuilder;
 
 import com.colpatria.springboot.backend.apirest.models.entity.Region;
 
