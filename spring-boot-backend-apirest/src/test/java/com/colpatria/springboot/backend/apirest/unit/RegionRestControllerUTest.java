@@ -1,4 +1,4 @@
-package com.colpatria.springboot.backend.apirest.controllers;
+package com.colpatria.springboot.backend.apirest.unit;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
@@ -35,6 +35,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.colpatria.springboot.backend.apirest.SpringBootBackendApirestApplication;
+import com.colpatria.springboot.backend.apirest.controllers.RegionRestController;
 import com.colpatria.springboot.backend.apirest.models.entity.Region;
 import com.colpatria.springboot.backend.apirest.models.services.IRegionService;
 import com.colpatria.springboot.backend.apirest.testdatabuilder.RegionTestDataBuilder;
@@ -43,14 +44,14 @@ import com.colpatria.springboot.backend.apirest.testdatabuilder.RegionTestDataBu
 @TestPropertySource( locations = "classpath:applicationtest.properties")
 @SpringBootTest(classes = SpringBootBackendApirestApplication.class)
 @AutoConfigureMockMvc
-public class RegionRestControllerTest {
+public class RegionRestControllerUTest {
 
 	@Autowired
 	private WebApplicationContext context;
 	private MockMvc mvc;
 
-//	@MockBean
-//	private IRegionService regionService;
+	@MockBean
+	private IRegionService regionService;
 
 	@InjectMocks
 	private RegionRestController regionRestController;
@@ -85,16 +86,28 @@ public class RegionRestControllerTest {
 	}
 
 	@Test
-    public void getAllRegionsBD() throws Exception {      
+	public void getAllRegions() throws Exception {
+		List<Region> regiones = new ArrayList<Region>();
+		Region regionUno = new RegionTestDataBuilder().build();
+		Region regionDos = new RegionTestDataBuilder().withId(101).withNombre("Polo Sur").build();
+		regiones.add(regionUno);
+		regiones.add(regionDos);
+		when(regionService.findAll()).thenReturn(regiones);
 
-        // @formatter:off        
-        mvc.perform(get("/api/clientes/regiones")
-                .header("Authorization", "Bearer " + TOKEN)
-                .contentType(CONTENT_TYPE)              
-                .accept(CONTENT_TYPE))      
-        		.andDo(print())
-        		.andExpect(jsonPath("$", hasSize(8)))
-                .andExpect(status().isOk());  
-    }
+		mvc.perform(get("/api/clientes/regiones").header("Authorization", "Bearer " + TOKEN).contentType(CONTENT_TYPE)
+				.accept(CONTENT_TYPE)).andDo(print()).andExpect(jsonPath("$", hasSize(2)))
+				.andExpect(jsonPath("$[0].id", is(regionUno.getId()))).andExpect(status().isOk());
+	}
 
+	@Test
+	public void getAllRegionsUnauthorized() throws Exception {
+		List<Region> regiones = new ArrayList<Region>();
+		Region regionUno = new RegionTestDataBuilder().build();
+		regiones.add(regionUno);
+		when(regionService.findAll()).thenReturn(regiones);
+
+		mvc.perform(get("/api/clientes/regiones").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isUnauthorized());
+	}
+	
 }
