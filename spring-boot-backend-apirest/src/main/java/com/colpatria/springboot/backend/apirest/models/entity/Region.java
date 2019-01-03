@@ -22,6 +22,9 @@ public class Region implements Serializable {
 	private Integer id;
 	private String nombre;
 
+	public Region() {
+	}
+
 	public Integer getId() {
 		return id;
 	}

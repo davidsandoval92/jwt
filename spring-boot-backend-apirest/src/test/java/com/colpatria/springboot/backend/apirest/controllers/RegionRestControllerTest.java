@@ -108,5 +108,18 @@ public class RegionRestControllerTest {
 		mvc.perform(get("/api/clientes/regiones").contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isUnauthorized());
 	}
+	
+	@Test
+    public void getAllRegionsBD() throws Exception {      
+
+        // @formatter:off        
+        mvc.perform(get("/api/clientes/regiones")
+                .header("Authorization", "Bearer " + TOKEN)
+                .contentType(CONTENT_TYPE)              
+                .accept(CONTENT_TYPE))      
+        		.andDo(print())
+        		.andExpect(jsonPath("$", hasSize(8)))
+                .andExpect(status().isOk());  
+    }
 
 }
