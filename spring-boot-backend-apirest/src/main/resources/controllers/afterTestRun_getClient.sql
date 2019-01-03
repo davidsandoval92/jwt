@@ -1,0 +1,1 @@
+delete from clientes  where email = 'david.sandoval@ceiba.com.com';
