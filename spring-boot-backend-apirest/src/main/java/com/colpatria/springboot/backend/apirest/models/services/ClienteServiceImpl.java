@@ -14,6 +14,10 @@ public class ClienteServiceImpl implements IClienteService {
 
 	@Autowired
 	private IClienteDao clienteDao;
+	
+	public ClienteServiceImpl(IClienteDao clienteDao) {
+		this.clienteDao = clienteDao;
+	}
 
 	@Override
 	@Transactional(readOnly = true)

@@ -21,10 +21,13 @@ public class ClienteServiceImplTest {
 
 	@Mock
 	private IClienteDao clienteDao;
+	
+	private ClienteServiceImpl clienteServiceImpl;
 
 	@Before
 	public void setup() {
 		clienteDao = mock(IClienteDao.class);
+		clienteServiceImpl = new ClienteServiceImpl(clienteDao);
 	}
 
 	@Test
@@ -41,7 +44,7 @@ public class ClienteServiceImplTest {
 		clientesResponse.add(cliente4);
 		when(clienteDao.findAll()).thenReturn(clientesResponse);
 		// Act
-		clientesResponse = (List<Cliente>) clienteDao.findAll();
+		clientesResponse = (List<Cliente>) clienteServiceImpl.findAll();
 		// Assert
 		assertEquals(4, clientesResponse.size());
 	}
@@ -49,19 +52,17 @@ public class ClienteServiceImplTest {
 	@Test
 	public void findById() {
 		// Arrange
-		Optional<Cliente> clienteResponse;
-		Cliente clienteResponseConvert;
+		Cliente clienteResponse;
 		Cliente cliente = new ClienteTestDataBuilder().withApellido("Homero").build();
 
 		Optional<Cliente> client = Optional.of(cliente);
 
 		when(clienteDao.findById(123L)).thenReturn(client);
 		// Act
-		clienteResponse = clienteDao.findById(123L);
-		clienteResponseConvert = clienteResponse.get();
+		clienteResponse = clienteServiceImpl.findById(123L);
 		// Assert
-		assertEquals("David", clienteResponseConvert.getNombre());
-		assertEquals("Homero", clienteResponseConvert.getApellido());
+		assertEquals("David", clienteResponse.getNombre());
+		assertEquals("Homero", clienteResponse.getApellido());
 	}
 
 	@Test
@@ -72,7 +73,7 @@ public class ClienteServiceImplTest {
 
 		when(clienteDao.save(cliente)).thenReturn(cliente);
 		// Act
-		clienteResponse = clienteDao.save(cliente);
+		clienteResponse = clienteServiceImpl.save(cliente);
 		// Assert
 		assertEquals("homero@ceiba.com.co", clienteResponse.getEmail());
 		assertEquals("Homero", clienteResponse.getApellido());

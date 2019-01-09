@@ -19,12 +19,12 @@ public class RegionServiceImplTest {
 	@Mock
 	private IRegionDao regionDao;
 	
-	private RegionService regionService;
+	private RegionServiceImpl regionService;
 	
 	@Before
 	public void setup() {
 		regionDao = mock(IRegionDao.class);
-		regionService = new RegionService(regionDao);
+		regionService = new RegionServiceImpl(regionDao);
 	}
 	
 	@Test
